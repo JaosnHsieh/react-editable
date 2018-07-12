@@ -5,14 +5,15 @@ import Cell from "./Cell";
 const Row = props => {
   const cells = [];
   const y = props.y;
+  let columnWidthStyle = "";
   for (let x = 0; x < props.x; x += 1) {
+    columnWidthStyle += "minmax(60px, 1fr) ";
     cells.push(
       <Cell
         key={`${x}-${y}`}
         y={y}
         x={x}
         onChangedValue={props.handleChangedCell}
-        // updateCells={props.updateCells}
         value={props.rowData[x] || ""}
         headers={props.headers}
       />
@@ -22,7 +23,7 @@ const Row = props => {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "repeat( auto-fit, minmax(30px, 1fr) )",
+        gridTemplateColumns: columnWidthStyle,
         wordBreak: "break-all"
       }}
     >
@@ -33,7 +34,6 @@ const Row = props => {
 
 Row.propTypes = {
   handleChangedCell: PropTypes.func.isRequired,
-  //   updateCells: PropTypes.func.isRequired,
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
   rowData: PropTypes.shape({
